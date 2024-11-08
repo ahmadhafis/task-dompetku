@@ -1,14 +1,30 @@
+<script setup>
+import { mdiDelete } from '@mdi/js'
+</script>
+
 <template>
-  <div class="transaction-list">
-    <h3>Daftar Transaksi</h3>
-    <ul>
-      <li v-for="(transaction, index) in transactions" :key="index">
-        <span>{{ transaction.description }} - Rp {{ transaction.amount }}</span>
-        <button @click="removeTransaction(index)">Hapus</button>
-      </li>
-    </ul>
-    <button @click="clearAll">Hapus Semua Data</button>
-  </div>
+  <v-card style="background-color: beige;" class="transaction-list mt-5" outlined>
+    <v-card-title>Daftar Transaksi</v-card-title>
+    <v-card-text>
+      <v-list>
+        <v-list-item
+          v-for="(transaction, index) in transactions"
+          :key="index"
+          class="d-flex justify-space-between"
+        >
+          <div>
+            {{ transaction.description }} - {{ transaction.category }} - Rp
+            {{ transaction.amount }}
+          </div>
+          <v-btn :icon="mdiDelete" @click="removeTransaction(index)" color="red">
+          </v-btn>
+        </v-list-item>
+      </v-list>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn color="red" @click="clearAll">Hapus Semua Data</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -29,25 +45,5 @@ export default {
 .transaction-list {
   margin-top: 20px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  margin: 5px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-button {
-  margin-left: 10px;
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #ff4c4c;
-}
 </style>
+
